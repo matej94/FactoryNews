@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements NewsContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        presenter = new MainPresenter(this);
+        presenter = new MainPresenter(this, NetworkManager.getInstance());
         presenter.getNews();
 
     }
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NewsContract.View
 
     @Override
     public void showNews(List<News> newsList) {
-
+        NewsAdapter adapter = new NewsAdapter(newsList);
+        recyclerView.setAdapter(adapter);
     }
 }
