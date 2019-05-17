@@ -1,4 +1,4 @@
-package com.example.factorynews;
+package com.example.factorynews.network;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

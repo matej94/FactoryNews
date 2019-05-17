@@ -1,11 +1,14 @@
-package com.example.factorynews;
+package com.example.factorynews.view;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.factorynews.R;
 import com.example.factorynews.contract.NewsContract;
 import com.example.factorynews.model.News;
+import com.example.factorynews.model.adapter.NewsAdapter;
+import com.example.factorynews.network.NetworkManager;
 import com.example.factorynews.presenter.MainPresenter;
 
 import java.util.List;

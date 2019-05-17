@@ -1,4 +1,4 @@
-package com.example.factorynews;
+package com.example.factorynews.network;
 
 import com.example.factorynews.model.NewsResponse;
 

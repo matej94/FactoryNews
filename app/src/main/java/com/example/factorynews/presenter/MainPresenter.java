@@ -1,6 +1,6 @@
 package com.example.factorynews.presenter;
 
-import com.example.factorynews.INetworkManager;
+import com.example.factorynews.network.INetworkManager;
 import com.example.factorynews.contract.NewsContract;
 import com.example.factorynews.model.News;
 import com.example.factorynews.model.NewsResponse;
