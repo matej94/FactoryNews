@@ -1,4 +1,4 @@
-package com.example.factorynews.model.adapter;
+package com.example.factorynews.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,14 +11,14 @@ import com.example.factorynews.R;
 import com.example.factorynews.model.News;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import io.realm.RealmResults;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
-    private List<News> newsList;
+    private RealmResults<News> realmList;
 
-    public NewsAdapter(List<News> newsList) {
-        this.newsList = newsList;
+    public NewsAdapter(RealmResults<News> realmList) {
+        this.realmList = realmList;
     }
 
     @Override
@@ -30,17 +30,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(NewsViewHolder holder,final int position) {
-        // holder.AuthorTv.setText(dataList.get(position).getAuthor());
-        holder.TitleTv.setText(newsList.get(position).getTitle());
-        //holder.DescriptionTv.setText(dataList.get(position).getDescription());
-        //holder.URLTv.setText(dataList.get(position).getUrl());
-        //holder.PublishedAtTv.setText(dataList.get(position).getPublishedAt());
-        Picasso.with(holder.itemView.getContext()).load(newsList.get(position).getUrlToImage()).into(holder.imgPoster);
+        // holder.AuthorTv.setText(realmList.get(position).getAuthor());
+        holder.TitleTv.setText(realmList.get(position).getTitle());
+        //holder.DescriptionTv.setText(realmList.get(position).getDescription());
+        //holder.URLTv.setText(realmList.get(position).getUrl());
+        //holder.PublishedAtTv.setText(realmList.get(position).getPublishedAt());
+        Picasso.with(holder.itemView.getContext()).load(realmList.get(position).getUrlToImage()).into(holder.imgPoster);
     }
 
     @Override
     public int getItemCount() {
-        return newsList.size();
+        return realmList.size();
     }
 
     class NewsViewHolder extends RecyclerView.ViewHolder {

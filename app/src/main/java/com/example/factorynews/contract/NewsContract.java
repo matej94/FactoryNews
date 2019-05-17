@@ -4,9 +4,11 @@ import com.example.factorynews.model.News;
 
 import java.util.List;
 
+import io.realm.RealmResults;
+
 public interface NewsContract {
     interface View{
-        void showNews(List<News> newsList);
+        void showNews(RealmResults<News> newsList);
 
     }
     interface Presenter{

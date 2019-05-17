@@ -4,14 +4,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.factorynews.database.DatabaseManager;
 import com.example.factorynews.R;
 import com.example.factorynews.contract.NewsContract;
 import com.example.factorynews.model.News;
-import com.example.factorynews.model.adapter.NewsAdapter;
+import com.example.factorynews.view.adapter.NewsAdapter;
 import com.example.factorynews.network.NetworkManager;
 import com.example.factorynews.presenter.MainPresenter;
 
-import java.util.List;
+import io.realm.RealmResults;
 
 
 public class MainActivity extends AppCompatActivity implements NewsContract.View{
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements NewsContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        presenter = new MainPresenter(this, NetworkManager.getInstance());
+        presenter = new MainPresenter(this, NetworkManager.getInstance(), DatabaseManager.getDatabaseInstance());
         presenter.getNews();
 
     }
@@ -35,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements NewsContract.View
     }
 
     @Override
-    public void showNews(List<News> newsList) {
-        NewsAdapter adapter = new NewsAdapter(newsList);
+    public void showNews(RealmResults<News> realmList) {
+        NewsAdapter adapter = new NewsAdapter(realmList);
         recyclerView.setAdapter(adapter);
     }
 }

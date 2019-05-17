@@ -2,7 +2,9 @@ package com.example.factorynews.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class News {
+import io.realm.RealmObject;
+
+public class News extends RealmObject {
     @SerializedName("author")
     private String author;
     @SerializedName("title")
@@ -16,6 +18,7 @@ public class News {
     @SerializedName("publishedAt")
     private String publishedAt;
 
+    public News (){}
     public News(String author, String title, String description, String url, String urlToImage, String publishedAt) {
         this.author = author;
         this.title = title;

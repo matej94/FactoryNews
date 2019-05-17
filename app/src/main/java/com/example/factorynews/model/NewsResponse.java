@@ -3,17 +3,18 @@ package com.example.factorynews.model;
 import com.example.factorynews.model.News;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsResponse {
     @SerializedName("articles")
-    private List<News> newsList;
+    private ArrayList<News> newsList;
 
-    public List<News> getNewsList() {
+    public ArrayList<News> getNewsList() {
         return newsList;
     }
 
-    public void setNewsList(List<News> newsList) {
+    public void setNewsList(ArrayList<News> newsList) {
         this.newsList = newsList;
     }
 }
