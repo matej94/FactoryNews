@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements NewsContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        presenter = new MainPresenter(this, NetworkManager.getInstance(), DatabaseManager.getDatabaseInstance());
+        presenter = new MainPresenter(this, NetworkManager.getInstance(), DatabaseManager.getDatabaseInstance(),this);
         presenter.getNews();
 
     }
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NewsContract.View
 
     @Override
     public void showNews(RealmResults<News> realmList) {
-        NewsAdapter adapter = new NewsAdapter(realmList);
+        NewsAdapter adapter = new NewsAdapter(this,realmList);
         recyclerView.setAdapter(adapter);
     }
 }
