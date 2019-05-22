@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/detail_poster"/>
-    <!-- TextView Employee Name -->
     <TextView
         android:id="@+id/detail_description"
         android:layout_width="match_parent"

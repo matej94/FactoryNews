@@ -22,22 +22,6 @@
             android:id="@+id/title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <!-- <TextView
-             android:id="@+id/author_tv"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content" />
-         <TextView
-             android:id="@+id/description_tv"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content" />
-         <TextView
-             android:id="@+id/url_tv"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content" />
-         <TextView
-             android:id="@+id/publishedAt_tv"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content" /> -->
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

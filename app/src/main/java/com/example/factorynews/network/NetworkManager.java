@@ -2,6 +2,10 @@ package com.example.factorynews.network;
 
 import com.example.factorynews.model.NewsResponse;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import retrofit2.Callback;
 
 public class NetworkManager implements INetworkManager {
@@ -23,8 +27,14 @@ public class NetworkManager implements INetworkManager {
         return networkManager;
     }
     @Override
-    public void getNewsList(Callback<NewsResponse> newsListCallback) {
-        apiClient.getNewsData(SOURCE, SORT_BY, API_KEY).enqueue(newsListCallback);
+    public void getNewsList(final Callback<NewsResponse> newsListCallback) {
+        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                apiClient.getNewsData(SOURCE, SORT_BY, API_KEY).enqueue(newsListCallback);
+            }
+        }, 0, 5, TimeUnit.MINUTES);
 
     }
 }

@@ -51,6 +51,7 @@ public class MainPresenter implements NewsContract.Presenter {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 if (response != null && response.body() != null) {
+                    Log.w("2.0 getFeed", new GsonBuilder().setPrettyPrinting().create().toJson(response));
 
                     mProgressDialog.dismiss();
                     databaseManager.deleteNews(realmList);
