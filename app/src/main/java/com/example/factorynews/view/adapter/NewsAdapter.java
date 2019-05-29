@@ -48,6 +48,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra("news_poster", realmList.get(position).getUrlToImage());
                 intent.putExtra("description", realmList.get(position).getDescription());
+                intent.putExtra("title", realmList.get(position).getTitle());
                 mContext.startActivity(intent);
             }
         });
