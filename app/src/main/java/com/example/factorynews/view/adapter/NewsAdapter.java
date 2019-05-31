@@ -14,10 +14,8 @@ import com.example.factorynews.DetailActivity;
 import com.example.factorynews.R;
 import com.example.factorynews.model.News;
 import com.squareup.picasso.Picasso;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.realm.RealmResults;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
@@ -46,9 +44,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             public void onClick(View v) {
 
                 Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra("news_poster", realmList.get(position).getUrlToImage());
-                intent.putExtra("description", realmList.get(position).getDescription());
                 intent.putExtra("title", realmList.get(position).getTitle());
+                intent.putExtra("item_position", position);
                 mContext.startActivity(intent);
             }
         });

@@ -1,51 +1,52 @@
 package com.example.factorynews;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
+import com.example.factorynews.contract.NewsContract;
+import com.example.factorynews.database.DatabaseManager;
+import com.example.factorynews.model.News;
+import com.example.factorynews.network.NetworkManager;
+import com.example.factorynews.presenter.MainPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmResults;
 
-public class DetailActivity extends AppCompatActivity {
-    @BindView(R.id.detail_description) TextView descriptionTv;
-    @BindView(R.id.detail_title) TextView titleTv;
-    @BindView(R.id.detail_poster) ImageView image;
+public class DetailActivity extends AppCompatActivity implements NewsContract.View {
+   private NewsContract.Presenter presenter;
+
+    @BindView(R.id.view_pager) ViewPager viewPager;
+   private int position;
+   DetailAdapter detailAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+        presenter = new MainPresenter(this, NetworkManager.getInstance(), DatabaseManager.getDatabaseInstance(),this);
+        presenter.getNews();
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getIncomingIntent();
-    }
-    private void getIncomingIntent() {
 
-        if (getIntent().hasExtra("news_poster") && getIntent().hasExtra("description") && getIntent().hasExtra("title")) {
-            String imageUrl = getIntent().getStringExtra("news_poster");
-            String desc = getIntent().getStringExtra("description");
-            String title = getIntent().getStringExtra("title");
-            setImage(imageUrl, desc, title);
-        }
-    }
-    private void setImage(String imageUrl, String desc, String title){
-        descriptionTv.setText(desc);
-        titleTv.setText(title);
-        Picasso.with(this)
-                .load(imageUrl)
-                .into(image);
-        getSupportActionBar().setTitle(title);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void showNews(RealmResults<News> newsList) {
+        position = getIntent().getIntExtra("item_position",0);
+        String title = getIntent().getStringExtra("title");
+        getSupportActionBar().setTitle(title);
+        detailAdapter = new DetailAdapter(this,newsList);
+        viewPager.setAdapter(detailAdapter);
+        viewPager.setCurrentItem(position);
+
     }
 }
