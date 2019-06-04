@@ -27,11 +27,14 @@ public class MainActivity extends AppCompatActivity implements NewsContract.View
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
+
+        // Instantiate the Presenter and ask to load data
         presenter = new MainPresenter(this, NetworkManager.getInstance(), DatabaseManager.getDatabaseInstance(),this);
         presenter.getNews();
 
     }
     private void initView(){
+        // Set layout manager to position the items
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NewsContract.View
 
     @Override
     public void showNews(RealmResults<News> realmList) {
+        // Pass results to NewsAdapter Class and binds adapter to the RecyclerView
         NewsAdapter adapter = new NewsAdapter(this,realmList);
         recyclerView.setAdapter(adapter);
     }

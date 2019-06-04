@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
 
+// Create realm model class for database and each JSON object
+// Annotate the field with @SerializedName to tell what property from the json to match this field with.
 public class News extends RealmObject {
     @SerializedName("author")
     private String author;
@@ -28,6 +30,7 @@ public class News extends RealmObject {
         this.publishedAt = publishedAt;
     }
 
+    //getter and setter
     public String getAuthor() {
         return author;
     }

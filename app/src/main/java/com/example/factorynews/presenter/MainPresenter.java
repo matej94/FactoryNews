@@ -37,10 +37,12 @@ public class MainPresenter implements NewsContract.Presenter {
 
     @Override
     public void getNews() {
+        // Ask NetworkManager to load data from API
         networkManager.getNewsList(getNewsListCallback());
     }
 
     protected Callback<NewsResponse> getNewsListCallback() {
+        // Show loader while data is retrieving
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading news...");
@@ -51,12 +53,14 @@ public class MainPresenter implements NewsContract.Presenter {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 if (response != null && response.body() != null) {
-                    Log.w("2.0 getFeed", new GsonBuilder().setPrettyPrinting().create().toJson(response));
-
                     mProgressDialog.dismiss();
+
+                    // Delete old data from database and store response into ArrayList
                     databaseManager.deleteNews(realmList);
                     NewsResponse newsResp = response.body();
                     newsList = newsResp.getNewsList();
+
+                    // Save new data to database
                     for (int i = 0; i < newsList.size(); i++) {
                         String author = newsList.get(i).getAuthor();
                         String title = newsList.get(i).getTitle();
@@ -66,6 +70,8 @@ public class MainPresenter implements NewsContract.Presenter {
                         String published = newsList.get(i).getPublishedAt();
                         databaseManager.addNews(author, title, description, url, urlToImage, published);
                     }
+
+                    // Get all news from database and show them
                     realmList = databaseManager.getAllNews();
                     view.showNews(realmList);
                 }
@@ -73,9 +79,12 @@ public class MainPresenter implements NewsContract.Presenter {
 
             @Override
             public void onFailure(Call<NewsResponse> call, Throwable t) {
+                // Get all news from database and show them
                 realmList = databaseManager.getAllNews();
                 view.showNews(realmList);
                 mProgressDialog.dismiss();
+
+                // Show alert dialog if something is wrong
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Something went wrong!");
                 builder.setTitle("Error !");

@@ -6,6 +6,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class MyApp extends Application {
+    // Initialize and configure Realm
     @Override
     public void onCreate() {
         super.onCreate();

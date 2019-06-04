@@ -17,17 +17,21 @@ public class NetworkManager implements INetworkManager {
     private final IApiClient apiClient;
 
     public NetworkManager() {
+        // Get ApiClient instance
         apiClient = ApiClient.getApiServiceInstance();
     }
 
+    // Implementing Singleton pattern
     public static NetworkManager getInstance() {
         if (networkManager == null) {
             networkManager = new NetworkManager();
         }
         return networkManager;
     }
+
     @Override
     public void getNewsList(final Callback<NewsResponse> newsListCallback) {
+        // Send network request every 5 minutes with corresponding parameters
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override

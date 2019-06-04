@@ -1,4 +1,4 @@
-package com.example.factorynews;
+package com.example.factorynews.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.factorynews.R;
 import com.example.factorynews.model.News;
 import com.squareup.picasso.Picasso;
 
@@ -20,6 +21,7 @@ public class DetailAdapter extends PagerAdapter {
     private Context mContext;
     LayoutInflater inflater;
 
+    // Pass in the news array into the constructor
     public DetailAdapter(Context context,RealmResults<News> realmList) {
         this.realmList = realmList;
         this.mContext = context;
@@ -40,9 +42,11 @@ public class DetailAdapter extends PagerAdapter {
         TextView descTv;
         ImageView image;
 
+        // Inflating layout which represents a single page for current position
         inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.viewpager_item, container, false);
 
+        // Provide a reference to the views for each data item and set up the view
         titleTv = itemView.findViewById(R.id.detail_title);
         descTv = itemView.findViewById(R.id.detail_description);
 

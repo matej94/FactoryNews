@@ -10,13 +10,16 @@ public class ApiClient {
     private static final String BASE_URL = "https://newsapi.org/v1/";
     private static Retrofit retrofit;
     private static IApiClient apiClient;
+
+    // Set connection and read timeout
      private static OkHttpClient getClient(){
             OkHttpClient.Builder builder = new OkHttpClient.Builder()
                     .connectTimeout(5, TimeUnit.MINUTES)
                     .readTimeout(5, TimeUnit.MINUTES);
             return builder.build();
         }
-    private static Retrofit getRetrofitInstance() {
+        // Implementing Singleton pattern for Retrofit and ApiClient
+    public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
